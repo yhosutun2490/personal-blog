@@ -1,2 +1,7 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+/* theme mode color variant */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+@custom-variant light (&:where([data-theme=light], [data-theme=light] *));
+@custom-variant sepia (&:where([data-theme=sepia], [data-theme=sepia] *));
