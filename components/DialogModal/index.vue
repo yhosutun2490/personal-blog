@@ -1,7 +1,7 @@
 <template>
   <dialog id="modal__search" :data-theme="$colorMode.preference" class="modal" open>
     <div class="modal-box">
-      <h3 class="text-lg font-bold">Hello!</h3>
+      <InputSearch />
       <p class="py-4">Press ESC key or click the button below to close</p>
       <div class="modal-action">
         <form method="dialog">
@@ -13,5 +13,6 @@
   </dialog>
 </template>
 <script setup>
+import InputSearch  from '@/components/InputSearch/index.vue';
 const emits = defineEmits(['close'])
 </script>
