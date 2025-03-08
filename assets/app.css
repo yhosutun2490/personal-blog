@@ -2,6 +2,11 @@
 @plugin "daisyui";
 
 /* theme mode color variant */
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
-@custom-variant light (&:where([data-theme=light], [data-theme=light] *));
-@custom-variant sepia (&:where([data-theme=sepia], [data-theme=sepia] *));
+@custom-variant light (&:where([class~="light-mode"], [class~="light-mode"] *));
+@custom-variant dark (&:where([class~="dark-mode"], [class~="dark-mode"] *));
+@custom-variant luxury (&:where([class~="luxury-mode"], [class~="luxury-mode"] *));
+
+/* ui theme */
+@plugin "daisyui" {
+    themes: all;
+}

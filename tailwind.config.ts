@@ -1,5 +1,5 @@
 export default {
-    darkMode: "class",
+    darkMode: ["class", '[class~="dark-mode"]'], // 讓 Tailwind 識別 `.dark-mode`
     content: [
       "./app.vue",
       "./components/**/*.{vue,js,ts}",
