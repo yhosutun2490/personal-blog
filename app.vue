@@ -13,7 +13,7 @@ const colorMode = useColorMode();
 const updateTheme = () => {
   if (process.client) {
     if (colorMode.value === "light") {
-      document.documentElement.setAttribute("data-theme", "bumblebee");
+      document.documentElement.setAttribute("data-theme", "cupcake");
     } else if (colorMode.value === "dark") {
       document.documentElement.setAttribute("data-theme", "dark");
     } else if (colorMode.value === "retro") {
@@ -31,19 +31,4 @@ onMounted(updateTheme);
 watchEffect(updateTheme);
 </script>
 <style>
-.light-mode body {
-  background-color: #fff;
-  color: rgba(0, 0, 0, 0.8);
-}
-
-/* 依據 data-theme 切換顏色 */
-.dark-mode body {
-  background-color: #091a28;
-  color: #ebf4f1;
-}
-
-.sepia-mode body {
-  background-color: #f1e7d0;
-  color: #5b4636;
-}
 </style>

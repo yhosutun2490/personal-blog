@@ -7,9 +7,9 @@
      :data-theme="$colorMode.preference"
   >
     <NuxtLink to="/" class="text-2xl"> Rafael(拉法葉)'s Blog </NuxtLink>
-    <NuxtLink to="/" class="text-2xl"> 鐵人賽專欄</NuxtLink>
-    <NuxtLink to="/" class="text-2xl"> 所有文章</NuxtLink>
-    <NuxtLink to="/" class="text-2xl"> 心情雜事</NuxtLink>
+    <NuxtLink to="/" class="nav-link text-2xl"> 鐵人賽專欄</NuxtLink>
+    <NuxtLink to="/" class="nav-link text-2xl"> 所有文章</NuxtLink>
+    <NuxtLink to="/" class="nav-link text-2xl"> 心情雜事</NuxtLink>
     <ClientOnly>
       <ColorModePicker />
     </ClientOnly>
@@ -35,3 +35,24 @@ import { Icon } from "@iconify/vue";
 import { ref } from "vue"
 const isOpenSearchModal = ref(false)
 </script>
+<style scoped>
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background-color: currentColor;
+  transition: all 0.3s ease;
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+}
+.nav-link:hover::after {
+  width: 100%;
+  transform: translateX(-50%) scaleX(1);
+}
+</style>

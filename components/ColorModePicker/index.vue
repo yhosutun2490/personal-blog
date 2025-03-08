@@ -1,7 +1,7 @@
 <template>
   <div class="color-mode-picker flex gap-3">
     <div
-      v-for="theme of ['light', 'dark', 'retro']"
+      v-for="theme of ['cupcake', 'dark', 'retro']"
       :key="theme"
       :class="{
         'border-gray-300': colorMode.value !== theme,
@@ -28,7 +28,7 @@ function changeTheme (theme)  {
   colorMode.preference = theme
 }
 function iconName(theme) {
-  if (theme === "light") return "vaadin:sun-o";
+  if (theme === "cupcake") return "vaadin:sun-o";
   if (theme === "dark") return "vaadin:moon-o";
   if (theme === "retro") return "vaadin:coffee";
   return "vaadin:sun-o";
