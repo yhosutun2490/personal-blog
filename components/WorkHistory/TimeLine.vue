@@ -8,7 +8,7 @@
       <hr :class="{'bg-primary': activeYear >= year}"/>
       <div 
         class="timeline-start timeline-box btn cursor-pointer text-xl hover:scale-[1.05]"
-        :class="{'text-cyan-800': activeYear >= year}"
+        :class="{'text-primary': activeYear >= year}"
         v-if="index%2!==0"
         @click="emits('update',year)"
       >
@@ -30,7 +30,7 @@
       </div>
       <div 
         class="timeline-end timeline-box btn cursor-pointer text-xl  hover:scale-[1.05]"
-        :class="{'text-cyan-800': activeYear >= year}"
+        :class="{'text-primary': activeYear >= year}"
         v-if="index%2===0"
         @click="emits('update',year)"
       >
