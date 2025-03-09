@@ -1,13 +1,13 @@
 <template>
-  <ul class="flex flex-col timeline timeline-vertical h-[100%]">
-    <p class="title text-primary text-xl text-center mb-[1rem]">Career Road Map</p>
+  <ul class="flex items-center justify-center lg:flex-col timeline lg:timeline-vertical w-[100%] h-[100%]">
+    <p class="hidden xl:block title text-primary text-xl text-center mb-[1rem]">Career Road Map</p>
     <li 
-        class="h-[15%]"
+        class="w-[15%] h-[5%] lg:h-[20%]"
         v-for="(year, index) in years" :key="year"
     >
       <hr :class="{'bg-primary': activeYear >= year}"/>
       <div 
-        class="timeline-start timeline-box btn cursor-pointer text-xl hover:scale-[1.05]"
+        class="timeline-start timeline-box btn cursor-pointer text-sm lg:text-xl hover:scale-[1.05]"
         :class="{'text-primary': activeYear >= year}"
         v-if="index%2!==0"
         @click="emits('update',year)"
@@ -29,7 +29,7 @@
         </svg>
       </div>
       <div 
-        class="timeline-end timeline-box btn cursor-pointer text-xl  hover:scale-[1.05]"
+        class="timeline-end timeline-box btn cursor-pointer text-sm lg:text-xl  hover:scale-[1.05]"
         :class="{'text-primary': activeYear >= year}"
         v-if="index%2===0"
         @click="emits('update',year)"

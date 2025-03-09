@@ -3,7 +3,7 @@
     <div class="hero bg-base-200 px-[15%] py-[2%]">
       <div class="hero-content flex-col lg:flex-row">
         <div>
-          <h1 class="text-5xl font-bold">黃思惇 - Rafael (拉法葉)</h1>
+          <h1 class=" text-2xl lg:text-3xl xl:text-5xl font-bold">黃思惇 - Rafael (拉法葉)</h1>
           <p class="py-6 w-[90%]">
             {{ description }}
           </p>
@@ -48,12 +48,14 @@
         </div>
         <NuxtImg
           src="personal.jpg"
-          class="max-w-sm rounded-2xl shadow-2xl w-[300px] h-[300px]"
+          class="max-w-sm rounded-2xl shadow-2xl 
+          w-[200px] h-[200px]
+          lg:w-[300px] lg:h-[300px]"
         />
       </div>
     </div>
-    <div class="work-history-section relative w-[100%] h-[250dvh]">
-      <WorkHistory class="sticky top-0 left-0 pt-[100px]"/>
+    <div class="work-history-section relative w-[100%] h-[150dvh]">
+      <WorkHistory class="sticky top-[50px] pt-[50px] xl:top-[100px] left-0 xl:pt-[100px]"/>
     </div>
   </div>
 </template>

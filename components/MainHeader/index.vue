@@ -1,15 +1,15 @@
 <template>
-  <div class="navbar flex justify-between items-center px-[20%] py-5 border-b
+  <div class="navbar flex justify-between items-center px-[5%] py-5 border-b
       dark:border-gray-800
       light:border-gray-200 
       sepia: border-amber-100
      font-semibold"
      :data-theme="$colorMode.preference"
   >
-    <NuxtLink to="/" class="text-2xl"> Rafael(拉法葉)'s Blog </NuxtLink>
-    <NuxtLink to="/" class="nav-link text-2xl"> 鐵人賽專欄</NuxtLink>
-    <NuxtLink to="/" class="nav-link text-2xl"> 所有文章</NuxtLink>
-    <NuxtLink to="/" class="nav-link text-2xl"> 心情雜事</NuxtLink>
+    <NuxtLink to="/" class="text-2xl"> Rafael's Blog </NuxtLink>
+    <NuxtLink to="/" class="nav-link text-lg ml-auto"> 鐵人賽專欄</NuxtLink>
+    <NuxtLink to="/" class="nav-link text-lg mx-[1rem]"> 所有文章</NuxtLink>
+    <NuxtLink to="/" class="nav-link text-lg mr-[1rem]"> 心情雜事</NuxtLink>
     <ClientOnly>
       <ColorModePicker />
     </ClientOnly>
@@ -17,7 +17,7 @@
       icon="vaadin:search"
       width="24"
       height="24"
-      class="cursor-pointer"
+      class="cursor-pointer ml-[1rem]"
       @click="isOpenSearchModal=true"
     />
     <DialogModal

@@ -1,22 +1,29 @@
 <template>
   <section
-    class="work-history w-[100%] h-[100dvh] px-[10%] flex items-center justify-between"
+    class="work-history w-[100%] h-[auto] px-[5%] xl:px-[10%] flex flex-wrap gap-[2rem]"
   >
+    <div class="career-road-map w-[100%] lg:order-2 lg:w-[15%]">
+      <TimeLine
+        :years="timeLineYear" 
+        :activeYear="currentSlideData.year"
+        @update="(year)=>handleClickTimeLine(year)"
+      />
+    </div>
     <Carousel
       v-bind="carouselConfig"
       ref="carouselRef"
-      class="carousel h-[80%] my-auto"
+      class="carousel w-[100%] h-[80%] my-auto"
       @slide-end="updateSlideIndex" 
     >
       <Slide v-for="item in carouselData" :key="item.id">
-        <div class="card bg-base-100 w-[450px] h-[350px] shadow-sm rounded-2xl">
+        <div class="card bg-base-100 w-[350px] h-[250px] lg:w-[450px] lg:h-[350px] shadow-sm rounded-2xl">
           <figure class="w-[100%] h-[100%]">
             <NuxtImg :src="item.image" class="card-img rounded-2xl" />
           </figure>
         </div>
       </Slide>
     </Carousel>
-    <div class="card-body w-[100%] font-semibold">
+    <div class="card-body  font-semibold w-[100%] lg:w-[30%]">
       <h2 class="card-title card-primary text-2xl">{{ currentSlideData?.year }}</h2>
       <main>
         <p class="text-lg mb-[1rem]"> {{ currentSlideData?.data?.main }}</p>
@@ -39,11 +46,7 @@
         </div>
       </div>
     </div>
-    <TimeLine 
-      :years="timeLineYear" 
-      :activeYear="currentSlideData.year"
-      @update="(year)=>handleClickTimeLine(year)"
-    />
+
   </section>
 </template>
 
@@ -169,7 +172,7 @@ const handleScroll = throttle(() => {
   }
 
   lastScrollY.value = currentScrollY;
-}, 1000); // 1000ms 限制
+}, 50); // 1000ms 限制
 
 
 onMounted(() => {
@@ -181,12 +184,7 @@ onUnmounted(() => {
 });
 </script>
 <style scoped>
-.work-history {
-  display: grid;
-  grid-template-columns: 2fr 400px 1fr;
-  gap: 20px;
-  grid-template-rows: 100%;
-}
+
 .carousel {
   width: 100%;
   height: 100%;
@@ -197,4 +195,12 @@ onUnmounted(() => {
   height: 100%;
   object-fit: cover;
 }
+
+@media screen and (min-width: 1024px) {
+  .carousel {
+    width: 40%;
+  }  
+}
+  
+
 </style>
