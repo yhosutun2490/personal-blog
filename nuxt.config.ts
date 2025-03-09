@@ -3,7 +3,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  modules: ['@nuxtjs/color-mode', '@nuxt/content', '@nuxt/icon'],
+  modules: ['@nuxtjs/color-mode', '@nuxt/content', '@nuxt/icon','@nuxt/image'],
   colorMode: {
     preference: 'system', // 預設的顏色模式，'system' 會根據使用者的作業系統主題設定
     fallback: 'light', // 當系統無法偵測顏色模式時，使用的預設值
