@@ -1,5 +1,5 @@
 <template>
-  <div class="w-[100dvw] h-[100dvh]">
+  <div class="w-[100%] h-[100dvh]" ref="containerRef">
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
@@ -7,8 +7,11 @@
 </template>
 
 <script setup>
-import { watchEffect, onMounted } from "vue";
+import { watchEffect, onMounted, provide } from "vue";
 const colorMode = useColorMode();
+const { containerRef, locoScroll } = useLocoScroll();
+provide('locoScroll',locoScroll)
+
 // 確保 document 只在 client 端執行
 const updateTheme = () => {
   if (process.client) {
@@ -30,5 +33,4 @@ onMounted(updateTheme);
 // 監聽 colorMode 變更並更新主題
 watchEffect(updateTheme);
 </script>
-<style>
-</style>
+<style></style>

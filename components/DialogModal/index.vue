@@ -1,5 +1,5 @@
 <template>
-  <dialog id="modal__search" :data-theme="$colorMode.preference" class="modal" open>
+  <dialog id="modal__search" :data-theme="$colorMode.preference" class="modal z-10" open>
     <div class="modal-box">
       <InputSearch />
       <p class="py-4">Press ESC key or click the button below to close</p>
