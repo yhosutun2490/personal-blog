@@ -52,8 +52,8 @@
         />
       </div>
     </div>
-    <div class="work-history-section relative w-[100%] h-[500dvh] pt-[80px]">
-      <WorkHistory class="sticky top-0 left-0"/>
+    <div class="work-history-section relative w-[100%] h-[250dvh]">
+      <WorkHistory class="sticky top-0 left-0 pt-[100px]"/>
     </div>
   </div>
 </template>
@@ -63,9 +63,10 @@ import { ref } from "vue";
 import WorkHistory from "@/components/WorkHistory/index.vue";
 
 const description = ref(`
-  我是拉法葉，一名具有一年半資歷的前端工程師，曾參與客戶數據平台與設計公司的開發專案。
+  我是拉法葉，一名具有一年半資歷的前端工程師，參與客戶數據平台與設計公司的開發專案。
+  於2025年榮獲IT邦幫忙-鐵人賽技術文章-JavaScript組-佳作。
   擁有 Vue.js 和 React.js 開發經驗，並具備良好的團隊合作與問題解決能力。
-  曾於國際合作發展基金會(ICDF)擔任海外農業技師五年，期間透過自學分析氣象資料，開發輔助工具，協助農民團體優化生產管理。
+  並曾擔任國際合作發展基金會(ICDF)擔任海外農業技師五年，分析氣象資料，開發輔助工具，協助農民團體優化生產管理。
 `);
 
 const skills = ref({
