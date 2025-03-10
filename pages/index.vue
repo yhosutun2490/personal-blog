@@ -54,7 +54,7 @@
         />
       </div>
     </div>
-    <div class="work-history-section relative w-[100%] h-[150dvh]">
+    <div class="work-history-section relative w-[100%] h-[80dvh]">
       <WorkHistory class="sticky top-[50px] pt-[50px] xl:top-[100px] left-0 xl:pt-[100px]"/>
     </div>
   </div>

@@ -133,22 +133,22 @@ const carouselData = ref([
 ]);
 const timeLineYear = computed(()=>carouselData.value?.map(item=>item.year))
 const currentSlideData = computed(()=>carouselData.value[activeIndex.value])
-const lastScrollY = ref(0);
-const scrollDirection = ref("down");
+// const lastScrollY = ref(0);
+// const scrollDirection = ref("down");
 
 let isThrottled = false;
 
-function throttle(func, delay) {
-  return (...args) => {
-    if (!isThrottled) {
-      func(...args);
-      isThrottled = true;
-      setTimeout(() => {
-        isThrottled = false;
-      }, delay);
-    }
-  };
-}
+// function throttle(func, delay) {
+//   return (...args) => {
+//     if (!isThrottled) {
+//       func(...args);
+//       isThrottled = true;
+//       setTimeout(() => {
+//         isThrottled = false;
+//       }, delay);
+//     }
+//   };
+// }
 function updateSlideIndex(info) {
     activeIndex.value = info.currentSlideIndex
 }
@@ -160,28 +160,28 @@ function handleClickTimeLine(year) {
   }
 }
 
-const handleScroll = throttle(() => {
-  const currentScrollY = window.scrollY;
+// const handleScroll = throttle(() => {
+//   const currentScrollY = window.scrollY;
 
-  if (currentScrollY > lastScrollY.value) {
-    scrollDirection.value = "down";
-    carouselRef.value?.next();
-  } else if (currentScrollY < lastScrollY.value) {
-    scrollDirection.value = "up";
-    carouselRef.value?.prev();
-  }
+//   if (currentScrollY > lastScrollY.value) {
+//     scrollDirection.value = "down";
+//     carouselRef.value?.next();
+//   } else if (currentScrollY < lastScrollY.value) {
+//     scrollDirection.value = "up";
+//     carouselRef.value?.prev();
+//   }
 
-  lastScrollY.value = currentScrollY;
-}, 50); // 1000ms 限制
+//   lastScrollY.value = currentScrollY;
+// }, 50); // 1000ms 限制
 
 
-onMounted(() => {
-  window.addEventListener("scroll", handleScroll);
-});
+// onMounted(() => {
+//   window.addEventListener("scroll", handleScroll);
+// });
 
-onUnmounted(() => {
-  window.value.removeEventListener("scroll", handleScroll);
-});
+// onUnmounted(() => {
+//   window.value.removeEventListener("scroll", handleScroll);
+// });
 </script>
 <style scoped>
 
