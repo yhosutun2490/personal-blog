@@ -6,7 +6,7 @@ export default {
       "./layouts/**/*.vue",
       "./pages/**/*.vue",
     ],
-    plugins: [require("daisyui")],
+    plugins: [require("daisyui"),require("@tailwindcss/typography")],
     daisyui: {
       themes: ["light", "dark", "cupcake", "bumblebee", "emerald", "sepia"],
     },

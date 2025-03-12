@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 @plugin "daisyui";
 
 /* theme mode color variant */
@@ -10,3 +11,13 @@
 @plugin "daisyui" {
     themes: all;
 }
+@layer {
+    pre.shiki {
+        @apply bg-accent text-gray-200 p-4 rounded-lg overflow-x-auto;
+    }
+
+}
+
+
+
+

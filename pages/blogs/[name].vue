@@ -1,7 +1,7 @@
 <template>
-  <div class="blogs__pages">
+  <div class="blogs__pages prose prose-xl">
     <p>我是blogs分頁</p>
-    <ContentRenderer v-if="page" :value="page[0]" />
+    <ContentRenderer v-if="page" :value="page[0]"/>
   </div>
 </template>
 

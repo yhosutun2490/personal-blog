@@ -13,6 +13,16 @@ published: true
 
 If you've purchased a domain from Namecheap and you want to connect it to your Vercel app, there are a few steps you need to follow. In this blog, we'll guide you through the process of connecting your Namecheap domain with your Vercel app.
 
+### code
+
+
+```js [file.js]{2} meta-info=val
+  export default () => {
+    console.log('Code block')
+  }
+```
+
+
 ### Step 1: Add a custom domain to your Vercel app
 
 The first step is to add your custom domain to your Vercel app. To do this, log in to your Vercel account and go to your app dashboard. Click on "Settings" and then "Domains". Click on "Add Domain" and enter your custom domain name. Then click on "Add".
