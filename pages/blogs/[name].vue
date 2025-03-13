@@ -1,7 +1,6 @@
 <template>
-  <div class="blogs__pages prose prose-xl">
-    <p>我是blogs分頁</p>
-    <ContentRenderer v-if="page" :value="page[0]"/>
+  <div class="blogs__pages prose prose-xl w-full max-w-none lg:px-[20%] lg:py-[2%]">
+    <ContentRenderer v-if="page" :value="page"/>
   </div>
 </template>
 
@@ -10,7 +9,7 @@ const { name } = useRoute().params;
 const { data:page , error } = await useAsyncData(
   `blogs-data`,
   () => {
-    return queryCollection("blogs").all();
+    return queryCollection("blogs").where('title','=','Vue Create App and Mount').first();
   },
   {
     watch: [name],

@@ -15,7 +15,20 @@
     pre.shiki {
         @apply bg-accent text-gray-200 p-4 rounded-lg overflow-x-auto;
     }
-
+    pre {
+        width: fit-content;
+        min-width: min(80%,350px); /* 依需求調整 */
+        padding: 8px 16px; /* 適當的內邊距 */
+        border-radius: 5px; /* 圓角 */
+        overflow-x: auto; /* 避免太長的內容超出 */
+      }
+    h1,h2,h3,h4 {
+        a {
+            @apply text-info;
+            text-decoration: none;
+        }
+    }
+   
 }
 
 
