@@ -6,8 +6,8 @@
 
 <script setup>
 const { name } = useRoute().params;
-const { data:page , error } = await useAsyncData(
-  `blogs-data`,
+const { data:page, error } = await useAsyncData(
+  `blogs-data-${name}`,
   () => {
     return queryCollection("blogs").where('title','=','Vue Create App and Mount').first();
   },
@@ -15,5 +15,4 @@ const { data:page , error } = await useAsyncData(
     watch: [name],
   }
 );
-console.log('blogs pages', page.value)
 </script>
