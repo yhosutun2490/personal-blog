@@ -10,7 +10,8 @@
 import { watchEffect, onMounted, provide } from "vue";
 const colorMode = useColorMode();
 const { containerRef, locoScroll } = useLocoScroll();
-provide('locoScroll',locoScroll)
+// 讓 `provide` 的值是 computed
+provide("locoScroll", computed(() => locoScroll.value));
 
 // 確保 document 只在 client 端執行
 const updateTheme = () => {

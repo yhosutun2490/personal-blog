@@ -8,6 +8,9 @@ ogImage: /blogs-img/blog1.jpg
 tags: ['namecheap', 'vercel']
 published: true
 ---
+# blog主題
+
+![my image](/keroro_cry.jpg)
 
 ### Introduction
 
@@ -15,13 +18,11 @@ If you've purchased a domain from Namecheap and you want to connect it to your V
 
 ### code
 
-
 ```js [file.js]{2} meta-info=val
   export default () => {
     console.log('Code block')
   }
 ```
-
 
 ### Step 1: Add a custom domain to your Vercel app
 
