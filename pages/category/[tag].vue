@@ -1,11 +1,14 @@
 <template>
-  <div>
+  <container class="category-tags-page">
+    <div class="card bg-secondary rounded-box w-[30%] w-max-[250px] h-15 place-items-center">
+      #{{ tag }}
+    </div>
     <ul
-      class="search-lists list w-[100%] h-max-[300px] bg-base-300 rounded-box shadow-md"
+      class="search-lists list w-[100%] h-[100dvh] bg-base-300 rounded-box shadow-md"
     >
       <li
         class="list-row px-[1.5rem] py-[1rem]"
-        v-for="item in articles"
+        v-for="item in lists"
         :key="item.title"
         @click="handleClickCard(item.alt)"
       >
@@ -20,34 +23,22 @@
         </div>
       </li>
     </ul>
-  </div>
+  </container>
 </template>
 
 <script setup>
 
 const router = useRouter()
-const { data: articles, error } = await useAsyncData(
-  `all-blogs-data`,
+const { tag } = useRoute().params
+const { data: lists, error } = await useAsyncData(
+  `blog-category-data`,
   () => {
-    return queryCollection("blogs").all();
+    return queryCollection("blogs").where("tags", "LIKE", `%${tag}%`) 
+    .all();
   },
 );
+console.log('所有標籤文章', lists.value,'tag',tag)
 
-const tagsLists = articles.value.map(items => items.tags).reduce((acc, tag) => {
-  tag.forEach(item => acc[item] = (acc[item] || 0) + 1)
-  return acc
-}, {})
-const result = Object.entries(tagsLists).map(([tag, count]) => ({ name: tag, count }));
-
-const badgeColors = [
-  "badge-primary",
-  "badge-secondary",
-  "badge-accent",
-  "badge-info",
-  "badge-success",
-  "badge-warning",
-  "badge-error"
-];
 
 function handleClickCard(title) {
   router.push({ name: 'blogs-name', params: { name: title } });

@@ -1,6 +1,6 @@
 <template>
-  <div class="main-page">
-    <div class="hero bg-base-200 px-[15%] py-[2%]">
+  <div class="main-page px-[15%] py-[2%]">
+    <div class="hero bg-base-200">
       <div class="hero-content flex-col lg:flex-row">
         <div>
           <h1 class=" text-2xl lg:text-3xl xl:text-5xl font-bold">黃思惇 - Rafael (拉法葉)</h1>

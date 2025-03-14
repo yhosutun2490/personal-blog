@@ -17,6 +17,7 @@
         :class="badgeColors[index % 7]"
         v-for="(data, index) in result"
         :key="data"
+        @click="handleClickCategory(data.name)"
       >
         {{ data.name }} ({{ data.count }})
       </div>
@@ -52,8 +53,8 @@ const badgeColors = [
 ];
 
 
-function handleClickCard(title) {
-  router.push({ name: 'blogs-name', params: { name: title } });
+function handleClickCategory(category) {
+  router.push({ name: 'category-tag', params: { tag:category } });
 }
 
 </script>
