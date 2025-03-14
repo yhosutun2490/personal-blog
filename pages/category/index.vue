@@ -1,8 +1,9 @@
 <template>
-    <div class="bg-white dark:bg-black light:bg-gray-100 sepia:bg-[#704214]">
-      <p class="text-gray-900 dark:text-white light:text-cyan-800 sepia:text-[#FFF8E7]">
-        這是一個多主題模式範例
-      </p>
+    <div class="flex flex-wrap lg:px-[20%] lg:py-[2%]">
+      <h2>
+        Category
+      </h2>
+      <NuxtImg src="category-logo.webp" class="w-[350px] h-[350px]"></NuxtImg>
     </div>
   </template>
   <script setup>

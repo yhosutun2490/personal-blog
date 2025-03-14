@@ -7,9 +7,10 @@
      :data-theme="$colorMode.preference"
   >
     <NuxtLink to="/" class="text-2xl"> Rafael's Blog </NuxtLink>
-    <NuxtLink to="/" class="nav-link text-lg ml-auto"> 鐵人賽專欄</NuxtLink>
-    <NuxtLink to="/" class="nav-link text-lg mx-[1rem]"> 所有文章</NuxtLink>
-    <NuxtLink to="/" class="nav-link text-lg mr-[1rem]"> 心情雜事</NuxtLink>
+    <NuxtLink to="/about" class="nav-link text-lg ml-auto">關於我</NuxtLink>
+    <NuxtLink to="/blogs" class="nav-link text-lg ml-[2rem]"> 部落格</NuxtLink>
+    <NuxtLink to="/category" class="nav-link text-lg ml-[2rem] mr-[5%]"> 文章分類</NuxtLink>
+  
     <ClientOnly>
       <ColorModePicker />
     </ClientOnly>

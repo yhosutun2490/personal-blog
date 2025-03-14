@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-container relative w-[100%] h-[auto]">
+  <div class="layout-container relative w-full h-[auto]">
     <MainHeader class="sticky top-0 left-0 z-5"/>
     <slot />
   </div>
