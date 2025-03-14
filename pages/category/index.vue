@@ -1,41 +1,27 @@
 <template>
-  <div class="flex flex-wrap px-[20%] py-[2%] gap-[2rem]">
-    <div class="introduction flex w-[100%]">
-      <h2 class="text-2xl w-[50%]">
-        Category
-      </h2>
-      <NuxtImg src="category-logo.webp" class="w-[350px] h-[350px]" />
+  <div class="flex flex-wrap h-[600px] px-[20%] py-[2%] gap-[2rem]">
+    <div class="introduction flex gap-[5%] w-[100%]">
+      <div class="text-5xl flex flex-col gap-5 w-[60%]">
+        文章分類
+        <main class="text-2xl">
+          這裡您可以透過點擊標籤來快速找到部落格相關主題的文章。  
+          這樣能夠更方便地探索特定領域的內容，無論是Vue、JavaScript、CSS，還是生活話題，都能輕鬆篩選出您感興趣的文章。
+        </main>
+      </div>
+      <NuxtImg src="category-logo.webp" class="w-[350px] h-[350px] rounded-xl" />
     </div>
 
-    <label class="input w-[100%]">
-      <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
-          <circle cx="11" cy="11" r="8" />
-          <path d="m21 21-4.3-4.3" />
-        </g>
-      </svg>
-      <input type="search" required placeholder="搜尋關鍵字或選擇標籤">
-    </label>
     <section class="category-lists flex flex-wrap gap-5">
-      <div v-for="(data, index) in result" class="badge badge-outline text-xl h-[30px] w-fit"
-        :class="badgeColors[index % 7]">
+      <div  
+        class="badge text-xl h-[50px] w-fit font-bold"
+        :class="badgeColors[index % 7]"
+        v-for="(data, index) in result"
+        :key="data"
+      >
         {{ data.name }} ({{ data.count }})
       </div>
     </section>
-    <ul class="search-lists list w-[100%] h-max-[300px] bg-base-300 rounded-box shadow-md">
-      <li class="list-row px-[1.5rem] py-[1rem] " v-for="(item) in articles" :key="item.title"
-        @click="handleClickCard(item.alt)">
-        <div>
-          <NuxtImg :src="item.ogImage" class="w-[100px] h-[100px] rounded-lg" />
-        </div>
-        <div>
-          <div class="text-xl">{{ item.title }}</div>
-          <div class="text-base uppercase font-semibold opacity-60">
-            {{ item.description }}
-          </div>
-        </div>
-      </li>
-    </ul>
+
   </div>
 </template>
 <script setup>

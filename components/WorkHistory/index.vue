@@ -51,7 +51,7 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref, watch } from "vue";
+import { ref } from "vue";
 import "vue3-carousel/carousel.css";
 import { Carousel, Slide } from "vue3-carousel";
 import TimeLine from "@/components/WorkHistory/TimeLine.vue";
