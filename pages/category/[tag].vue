@@ -1,35 +1,31 @@
 <template>
-  <container class="category-tags-page">
-    <div class="card bg-secondary rounded-box w-[30%] w-max-[250px] h-15 place-items-center">
+  <main class="category-tags-page h-[100dvh] flex flex-col gap-5 px-[15%] py-[2%]">
+    <div class="bg-secondary rounded-box w-[30%] w-max-[250px] h-15 flex text-2xl items-center justify-center">
       #{{ tag }}
     </div>
     <ul
-      class="search-lists list w-[100%] h-[100dvh] bg-base-300 rounded-box shadow-md"
+      class="search-lists list
+      grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
     >
-      <li
-        class="list-row px-[1.5rem] py-[1rem]"
-        v-for="item in lists"
-        :key="item.title"
-        @click="handleClickCard(item.alt)"
+     <li 
+        v-for="card in articleCardData"
+        :key="card.title"
       >
-        <div>
-          <NuxtImg :src="item.ogImage" class="w-[100px] h-[100px] rounded-lg" />
-        </div>
-        <div>
-          <div class="text-xl">{{ item.title }}</div>
-          <div class="text-base uppercase font-semibold opacity-60">
-            {{ item.description }}
-          </div>
-        </div>
-      </li>
+       <ArticleCard 
+        :data="card"
+       />
+     </li>
     </ul>
-  </container>
+  </main>
 </template>
 
 <script setup>
 
 const router = useRouter()
 const { tag } = useRoute().params
+// component
+import ArticleCard from '@/components/ArticleCard/index.vue';
+
 const { data: lists, error } = await useAsyncData(
   `blog-category-data`,
   () => {
@@ -37,7 +33,15 @@ const { data: lists, error } = await useAsyncData(
     .all();
   },
 );
-console.log('所有標籤文章', lists.value,'tag',tag)
+const articleCardData = computed(()=>{
+  return lists.value?.map(item=>({
+    date: item?.date,
+    image: item?.ogImage,
+    title:item?.title,
+    description: item?.description,
+    tags: item?.tags
+  }))
+})
 
 
 function handleClickCard(title) {
