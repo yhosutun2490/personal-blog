@@ -1,5 +1,5 @@
 <template>
-  <div class="w-[100%] h-[100dvh]" ref="containerRef">
+  <div ref="containerRef" class="w-[100%] h-[100dvh]">
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
@@ -15,7 +15,7 @@ provide("locoScroll", computed(() => locoScroll.value));
 
 // 確保 document 只在 client 端執行
 const updateTheme = () => {
-  if (process.client) {
+  if (import.meta.client) {
     if (colorMode.value === "light") {
       document.documentElement.setAttribute("data-theme", "cupcake");
     } else if (colorMode.value === "dark") {

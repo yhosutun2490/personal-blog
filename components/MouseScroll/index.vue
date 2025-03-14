@@ -1,7 +1,7 @@
 <template>
     <div class="scroll-downs">
       <div class="mousey">
-        <div class="scroller"></div>
+        <div class="scroller"/>
       </div>
       <p class="text-neutral-white text-center">Scroll</p>
     </div>

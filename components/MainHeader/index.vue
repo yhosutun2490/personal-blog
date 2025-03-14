@@ -1,5 +1,6 @@
 <template>
-  <div class="navbar flex justify-between items-center px-[5%] py-5 border-b
+  <div
+class="navbar flex justify-between items-center px-[5%] py-5 border-b
       dark:border-gray-800
       light:border-gray-200 
       sepia: border-amber-100
@@ -22,8 +23,8 @@
       @click="isOpenSearchModal=true"
     />
     <DialogModal
-      @close="isOpenSearchModal=false" 
-      v-if="isOpenSearchModal"
+      v-if="isOpenSearchModal" 
+      @close="isOpenSearchModal=false"
     />
   </div>
 </template>

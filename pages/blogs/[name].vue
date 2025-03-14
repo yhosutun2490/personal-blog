@@ -5,12 +5,11 @@
 </template>
 
 <script setup>
-import { inject } from 'vue'
 const { name } = useRoute().params;
 const { data: page, error } = await useAsyncData(
   `blogs-data-${name}`,
   () => {
-    return queryCollection("blogs").where('title', '=', 'Vue Create App and Mount').first();
+    return queryCollection("blogs").where('alt', '=', name).first();
   },
 );
 </script>

@@ -6,7 +6,7 @@ export function useLocoScroll() {
   let locoScroll = null;
 
   onMounted(() => {
-    if (process.client && containerRef.value) {
+    if (import.meta.client && containerRef.value) {
       locoScroll = new LocomotiveScroll({
         el: containerRef.value,
         smooth: true,

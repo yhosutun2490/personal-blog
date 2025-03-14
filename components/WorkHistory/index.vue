@@ -5,7 +5,7 @@
     <div class="career-road-map w-[100%] lg:order-2 lg:w-[15%]">
       <TimeLine
         :years="timeLineYear" 
-        :activeYear="currentSlideData.year"
+        :active-year="currentSlideData.year"
         @update="(year)=>handleClickTimeLine(year)"
       />
     </div>
@@ -27,20 +27,20 @@
       <h2 class="card-title card-primary text-2xl">{{ currentSlideData?.year }}</h2>
       <main>
         <p class="text-lg mb-[1rem]"> {{ currentSlideData?.data?.main }}</p>
-        <hr/>
+        <hr>
         <div 
-          class="work-road-map px-[12px] py-[10px]"
           v-for="(data,index) in currentSlideData?.data?.fulfillment"
           :key="index"
+          class="work-road-map px-[12px] py-[10px]"
         >
           {{ data }}
         </div>
       </main>
       <div class="w-[100%] flex flex-wrap gap-2 card-skills">
         <div 
+          v-for="(data,index) in currentSlideData?.data?.skills"
+           :key="index"
           class="badge badge-dash badge-info"
-           v-for="(data,index) in currentSlideData?.data?.skills"
-          :key="index"
         >
           {{ data }}
         </div>
@@ -136,7 +136,7 @@ const currentSlideData = computed(()=>carouselData.value[activeIndex.value])
 // const lastScrollY = ref(0);
 // const scrollDirection = ref("down");
 
-let isThrottled = false;
+const isThrottled = false;
 
 // function throttle(func, delay) {
 //   return (...args) => {

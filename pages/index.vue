@@ -10,36 +10,36 @@
           <div class="skill__sections flex flex-col gap-3">
             <div class="front-end flex flex-wrap gap-2 w-[100%]">
               <div
-                class="badge badge-outline badge-success min-w-fit"
                 v-for="(item, index) in skills.frontEnd"
                 :key="index"
+                class="badge badge-outline badge-success min-w-fit"
               >
                 {{ item }}
               </div>
             </div>
             <div class="back-end flex flex-wrap gap-2">
               <div
-                class="badge badge-outline badge-info min-w-fit"
                 v-for="(item, index) in skills.backEnd"
                 :key="index"
+                class="badge badge-outline badge-info min-w-fit"
               >
                 {{ item }}
               </div>
             </div>
             <div class="other flex flex-wrap gap-2">
               <div
-                class="badge badge-outline badge-error min-w-fit"
                 v-for="(item, index) in skills.other"
                 :key="index"
+                class="badge badge-outline badge-error min-w-fit"
               >
                 {{ item }}
               </div>
             </div>
             <div class="lang flex flex-wrap gap-2">
               <div
-                class="badge badge-outline badge-warning min-w-fit"
                 v-for="(item, index) in skills.lang"
                 :key="index"
+                class="badge badge-outline badge-warning min-w-fit"
               >
                 {{ item }}
               </div>
