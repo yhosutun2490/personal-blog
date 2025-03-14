@@ -15,15 +15,7 @@
     pre.shiki {
         @apply bg-accent text-gray-200 p-4 rounded-lg overflow-x-auto;
     }
-<<<<<<< HEAD
-    a {
-        text-decoration: none;
-    }
-    .prose h2, .prose h3 {
-        scroll-margin-top: 80px;
-      }
 
-=======
     pre {
         width: fit-content;
         min-width: min(80%,350px); /* 依需求調整 */
@@ -37,8 +29,10 @@
             text-decoration: none;
         }
     }
-   
->>>>>>> 7f91007c1c3d22fffc408525c1d269e835fdadab
+    .prose h2, .prose h3 {
+        scroll-margin-top: 80px;
+      }
+    
 }
 
 
