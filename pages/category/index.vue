@@ -3,7 +3,7 @@
       <h2>
         Category
       </h2>
-      <NuxtImg src="category-logo.webp"></NuxtImg>
+      <NuxtImg src="category-logo.webp" class="w-[350px] h-[350px]"></NuxtImg>
     </div>
   </template>
   <script setup>
