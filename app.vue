@@ -1,5 +1,5 @@
 <template>
-  <div ref="containerRef" class="w-[100%] h-[100dvh]">
+  <div ref="containerRef" class="w-[100%]">
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
@@ -7,11 +7,12 @@
 </template>
 
 <script setup>
-import { watchEffect, onMounted, provide } from "vue";
+import { watchEffect, onMounted, onUnmounted } from "vue";
+import LocomotiveScroll from 'locomotive-scroll';
 const colorMode = useColorMode();
-const { containerRef, locoScroll } = useLocoScroll();
-// 讓 `provide` 的值是 computed
-provide("locoScroll", computed(() => locoScroll.value));
+const containerRef = ref(null);
+const locoScroll = ref(null);
+provide("locoScroll", locoScroll);
 
 // 確保 document 只在 client 端執行
 const updateTheme = () => {
@@ -28,10 +29,23 @@ const updateTheme = () => {
   }
 };
 
-// 在元件掛載後更新主題
-onMounted(updateTheme);
-
 // 監聽 colorMode 變更並更新主題
 watchEffect(updateTheme);
+// 在元件掛載後更新主題
+onMounted(() => {
+  updateTheme();
+  if (import.meta.client && containerRef.value) {
+    locoScroll.value = new LocomotiveScroll({
+      el: containerRef.value,
+      smooth: true,
+    });
+  }
+});
+
+onUnmounted(() => {
+  if (locoScroll.value) {
+    locoScroll.value.destroy();
+    locoScroll.value = null;
+  }
+});
 </script>
-<style></style>
