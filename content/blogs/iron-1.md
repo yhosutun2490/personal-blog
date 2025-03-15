@@ -2,9 +2,9 @@
 title: Vue Create App and Mount
 date: 2024-09-14
 description: 介紹Vue的起手式和Create App是什麼，Vue的編譯和執行核心初步介紹。
-image: /iron/iron-1-1.jpg
+image: /iron/day1/iron-1-1.jpg
 alt: Vue-Create-App-and-Mount
-ogImage: /iron/iron-1-1.jpg
+ogImage: /iron/day1/iron-1-1.jpg
 tags: ['Vue','鐵人賽']
 published: true
 ---

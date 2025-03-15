@@ -1,14 +1,20 @@
 <template>
   <div ref="containerRef" class="w-[100%]">
     <NuxtLayout>
-      <NuxtPage />
+      <NuxtPage/>
     </NuxtLayout>
   </div>
 </template>
 
 <script setup>
 import { watchEffect, onMounted, onUnmounted } from "vue";
-import LocomotiveScroll from 'locomotive-scroll';
+import LocomotiveScroll from "locomotive-scroll";
+definePageMeta({
+  pageTransition: {
+    name: "page",
+    mode: "out-in",
+  },
+});
 
 const colorMode = useColorMode();
 const containerRef = ref(null);
@@ -50,13 +56,3 @@ onUnmounted(() => {
   }
 });
 </script>
-<style>
-.layout-enter-active,
-.layout-leave-active {
-  transition: all 0.8s;
-}
-.layout-enter-from,
-.layout-leave-to {
-  filter: grayscale(1);
-}
-</style>
