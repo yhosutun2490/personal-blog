@@ -1,17 +1,33 @@
 <template>
   <div
-class="navbar flex justify-between items-center px-[5%] py-5 border-b
-      dark:border-gray-800
-      light:border-gray-200 
-      sepia: border-amber-100
-     font-semibold"
-     :data-theme="$colorMode.preference"
+    class="navbar flex justify-between items-center px-[5%] py-5 border-b dark:border-gray-800 light:border-gray-200 sepia: border-amber-100 font-semibold"
+    :data-theme="$colorMode.preference"
   >
-    <NuxtLink to="/" class="text-2xl"> Rafael's Blog </NuxtLink>
-    <NuxtLink to="/about" class="nav-link text-lg ml-auto">關於我</NuxtLink>
-    <NuxtLink to="/blogs" class="nav-link text-lg ml-[2rem]"> 部落格</NuxtLink>
-    <NuxtLink to="/category" class="nav-link text-lg ml-[2rem] mr-[5%]"> 文章分類</NuxtLink>
-  
+    <NuxtLink to="/" active-class="text-primary font-bold" class="text-2xl">
+      Rafael's Blog
+    </NuxtLink>
+    <NuxtLink
+      to="/about"
+      class="nav-link text-lg ml-auto"
+      :class="{ 'text-primary font-bold': isActive('/about') }"
+    >
+      關於我
+    </NuxtLink>
+    <NuxtLink
+      :to="{ path: '/blogs' }"
+      class="nav-link text-lg ml-[2rem]"
+      :class="{ 'text-primary font-bold': isActive('/blogs') }"
+    >
+      部落格
+    </NuxtLink>
+    <NuxtLink
+      :to="{ path: '/category' }"
+      class="nav-link text-lg ml-[2rem] mr-[5%]"
+      :class="{ 'text-primary font-bold': isActive('/category') }"
+    >
+      文章分類
+    </NuxtLink>
+
     <ClientOnly>
       <ColorModePicker />
     </ClientOnly>
@@ -20,22 +36,24 @@ class="navbar flex justify-between items-center px-[5%] py-5 border-b
       width="24"
       height="24"
       class="cursor-pointer ml-[1rem]"
-      @click="isOpenSearchModal=true"
+      @click="isOpenSearchModal = true"
     />
-    <DialogModal
-      v-if="isOpenSearchModal" 
-      @close="isOpenSearchModal=false"
-    />
+    <DialogModal v-if="isOpenSearchModal" @close="isOpenSearchModal = false" />
   </div>
 </template>
 
 <script setup>
-import ColorModePicker from "@/components/ColorModePicker/index.vue"
-import DialogModal  from "@/components/DialogModal/index.vue";
+import ColorModePicker from "@/components/ColorModePicker/index.vue";
+import DialogModal from "@/components/DialogModal/index.vue";
 import { Icon } from "@iconify/vue";
 
-import { ref } from "vue"
-const isOpenSearchModal = ref(false)
+import { ref } from "vue";
+const isOpenSearchModal = ref(false);
+const route = useRoute();
+
+function isActive(path) {
+  return route.path.startsWith(path);
+}
 </script>
 <style scoped>
 .nav-link {

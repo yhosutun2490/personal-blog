@@ -13,10 +13,10 @@
 
     <section class="category-lists flex flex-wrap gap-5">
       <div  
-        class="badge text-xl h-[50px] w-fit font-bold"
-        :class="badgeColors[index % 7]"
         v-for="(data, index) in result"
         :key="data"
+        class="badge text-xl h-[50px] w-fit font-bold"
+        :class="badgeColors[index % 7]"
         @click="handleClickCategory(data.name)"
       >
         {{ data.name }} ({{ data.count }})
