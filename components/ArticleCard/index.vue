@@ -52,6 +52,10 @@ const props = defineProps({
     type: Object,
     default: () => {},
   },
+  side: {
+    type: Boolean,
+    default: false
+  }
 });
 
 const truncatedDescription = computed(() => {

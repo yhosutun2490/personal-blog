@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-wrap h-[600px] px-[20%] py-[2%] gap-[2rem]">
-    <div class="introduction flex gap-[5%] w-[100%]">
+    <div class="introduction flex justify-between gap-[5%] w-[100%]">
       <div class="text-5xl flex flex-col gap-5 w-[60%]">
         文章分類
         <main class="text-2xl">
@@ -8,7 +8,10 @@
           這樣能夠更方便地探索特定領域的內容，無論是Vue、JavaScript、CSS，還是生活話題，都能輕鬆篩選出您感興趣的文章。
         </main>
       </div>
-      <NuxtImg src="category-logo.webp" class="w-[350px] h-[350px] rounded-xl" />
+      <NuxtImg
+        src="category-logo.webp"
+        class="w-[250px] h-[250px] rounded-xl"
+      />
     </div>
 
     <section class="category-lists flex flex-wrap gap-5">

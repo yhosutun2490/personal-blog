@@ -70,7 +70,7 @@ onUnmounted(() => {
 
 .layout-enter-active,
 .layout-leave-active {
-  transition: all 0.4s;
+  transition: all 0.3s;
 }
 .layout-enter-from,
 .layout-leave-to {

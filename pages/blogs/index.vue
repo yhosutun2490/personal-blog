@@ -1,19 +1,19 @@
 <template>
-  <div class="flex flex-wrap h-[600px] px-[20%] py-[2%] gap-[2rem]">
-    <div class="introduction flex gap-[5%] w-[100%]">
-      <div class="text-5xl flex flex-col gap-5 w-[60%]">
-        文章分類
+  <div class="flex flex-col min-h-[80dvh] px-[20%] py-[2%]">
+    <div class="introduction flex justify-between gap-[5%] w-[100%] h-fit">
+      <div class="text-5xl flex flex-col gap-5 w-[60%] h-fit">
+        所有文章列表
         <main class="text-2xl">
-          這裡您可以透過點擊標籤來快速找到部落格相關主題的文章。
-          這樣能夠更方便地探索特定領域的內容，無論是Vue、JavaScript、CSS，還是生活話題，都能輕鬆篩選出您感興趣的文章。
+          這裡主要是匯集所有文章。
+          利用主題關鍵字或文章大綱描述，讓您輕鬆篩選出您感興趣的文章。
         </main>
       </div>
       <NuxtImg
-        src="category-logo.webp"
-        class="w-[350px] h-[350px] rounded-xl"
+        src="all-blogs-logo.webp"
+        class="w-[250px] h-[250px] rounded-xl"
       />
     </div>
-    <label class="input w-[100%]">
+    <label class="input w-[100%] mt-[1.5rem]">
       <svg
         class="h-[1em] opacity-50"
         xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +30,7 @@
           <path d="m21 21-4.3-4.3" />
         </g>
       </svg>
-      <input type="search" required placeholder="搜尋關鍵字或選擇標籤" />
+      <input type="search" class="h-[50px]" placeholder="搜尋關鍵字或選擇標籤" />
     </label>
   </div>
 </template>
