@@ -9,6 +9,7 @@
 <script setup>
 import { watchEffect, onMounted, onUnmounted } from "vue";
 import LocomotiveScroll from 'locomotive-scroll';
+
 const colorMode = useColorMode();
 const containerRef = ref(null);
 const locoScroll = ref(null);
@@ -49,3 +50,13 @@ onUnmounted(() => {
   }
 });
 </script>
+<style>
+.layout-enter-active,
+.layout-leave-active {
+  transition: all 0.8s;
+}
+.layout-enter-from,
+.layout-leave-to {
+  filter: grayscale(1);
+}
+</style>

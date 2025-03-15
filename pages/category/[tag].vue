@@ -3,7 +3,7 @@
     <div class="bg-secondary rounded-box w-[30%] w-max-[250px] h-15 flex text-2xl items-center justify-center">
       #{{ tag }}
     </div>
-    <section class="pagination">
+    <section class="pagination flex items-center">
       <Pagination 
         :data-per-row="dataPerPage" 
         :total-data-length="lists?.length"
@@ -12,6 +12,7 @@
         @prev="handlePaginatorPrevNext('prev')"
         @next="handlePaginatorPrevNext('next')"
       />
+      <p class="total-page text-xl text-gray-500 ml-[0.5rem]"> 共 {{ totalPages }} 頁</p>
     </section>
     <ul
       class="search-lists list
@@ -20,6 +21,7 @@
      <li 
         v-for="card in articleCardData"
         :key="card.title"
+        class="cursor-pointer relative hover:top-[-10px]"
         @click="handleClickCard(card.alt)"
       >
        <ArticleCard 
@@ -65,6 +67,7 @@ const articleCardData = computed(()=>{
     alt: item?.alt
   }))?.slice(start,end)
 })
+const totalPages = computed(()=>Math.ceil(lists.value.length / dataPerPage.value))
 
 function handlePaginatorPrevNext(step) {
   if (step === 'prev' && currentPage.value > 1) {

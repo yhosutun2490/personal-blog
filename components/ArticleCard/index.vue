@@ -1,7 +1,7 @@
 <template>
   <div class="card bg-base-100 shadow-lg flex flex-col">
     <figure class="w-full aspect-[16/9]">
-      <NuxtImg
+      <ImageSkeleton 
         class="object-cover w-full h-full"
         :src="data?.image"
         alt="card-img"
@@ -45,6 +45,8 @@
 
 <script setup>
 import { computed } from "vue";
+import ImageSkeleton from "@/components/ImageSkeleton/index.vue";
+
 const props = defineProps({
   data: {
     type: Object,
