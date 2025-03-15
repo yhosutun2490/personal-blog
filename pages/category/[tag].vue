@@ -3,6 +3,13 @@
     <div class="bg-secondary rounded-box w-[30%] w-max-[250px] h-15 flex text-2xl items-center justify-center">
       #{{ tag }}
     </div>
+    <section class="pagination">
+      <Pagination 
+        :data-per-row="3" 
+        :total-data-length="lists?.length"
+        :active-page="currentPage"
+      />
+    </section>
     <ul
       class="search-lists list
       grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
@@ -20,19 +27,28 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
+// component
+import ArticleCard from '@/components/ArticleCard/index.vue';
+import Pagination  from '@/components/Pagination/index.vue';
 
 const router = useRouter()
 const { tag } = useRoute().params
-// component
-import ArticleCard from '@/components/ArticleCard/index.vue';
-
-const { data: lists, error } = await useAsyncData(
+const { data: lists } = await useAsyncData(
   `blog-category-data`,
   () => {
-    return queryCollection("blogs").where("tags", "LIKE", `%${tag}%`) 
-    .all();
+    try {
+      return queryCollection("blogs").where("tags", "LIKE", `%${tag}%`) 
+      .all();
+    } catch (err) {
+      console.warn('get category err',err)
+      return []
+    }
+
   },
 );
+const currentPage = ref(1)
+
 const articleCardData = computed(()=>{
   return lists.value?.map(item=>({
     date: item?.date,
