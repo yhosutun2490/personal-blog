@@ -5,9 +5,12 @@
     </div>
     <section class="pagination">
       <Pagination 
-        :data-per-row="3" 
+        :data-per-row="dataPerPage" 
         :total-data-length="lists?.length"
         :active-page="currentPage"
+        @update-page="(val)=>currentPage = val"
+        @prev="handlePaginatorPrevNext('prev')"
+        @next="handlePaginatorPrevNext('next')"
       />
     </section>
     <ul
@@ -17,6 +20,7 @@
      <li 
         v-for="card in articleCardData"
         :key="card.title"
+        @click="handleClickCard(card.alt)"
       >
        <ArticleCard 
         :data="card"
@@ -48,17 +52,27 @@ const { data: lists } = await useAsyncData(
   },
 );
 const currentPage = ref(1)
-
+const dataPerPage = ref(3)
 const articleCardData = computed(()=>{
+  const start = (currentPage.value - 1) * dataPerPage.value; // 計算起始索引
+  const end = start + dataPerPage.value; // 計算結束索引
   return lists.value?.map(item=>({
     date: item?.date,
     image: item?.ogImage,
     title:item?.title,
     description: item?.description,
-    tags: item?.tags
-  }))
+    tags: item?.tags,
+    alt: item?.alt
+  }))?.slice(start,end)
 })
 
+function handlePaginatorPrevNext(step) {
+  if (step === 'prev' && currentPage.value > 1) {
+    currentPage.value --
+  } else if (step === 'next' && currentPage.value < articleCardData.value.length ) {
+    currentPage.value ++
+  }
+}
 
 function handleClickCard(title) {
   router.push({ name: 'blogs-name', params: { name: title } });

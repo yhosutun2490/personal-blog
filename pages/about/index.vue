@@ -2,7 +2,7 @@
   <div class="main-page">
     <div class="hero bg-base-200 px-[15%] py-[2%]">
       <div class="hero-content flex-col lg:flex-row">
-        <div>
+        <div class="w-[100%] lg:w-[75%]">
           <h1 class=" text-2xl lg:text-3xl xl:text-5xl font-bold">黃思惇 - Rafael (拉法葉)</h1>
           <p class="py-6 w-[90%]">
             {{ description }}
@@ -46,8 +46,8 @@
             </div>
           </div>
         </div>
-        <NuxtImg
-          src="personal.jpg"
+        <ImageSkeleton 
+          :src="'personal.jpg'"
           class="max-w-sm rounded-2xl shadow-2xl 
           w-[200px] h-[200px]
           lg:w-[300px] lg:h-[300px]"
@@ -63,6 +63,7 @@
 <script setup>
 import { ref } from "vue";
 import WorkHistory from "@/components/WorkHistory/index.vue";
+import ImageSkeleton  from "@/components/ImageSkeleton/index.vue";
 
 const description = ref(`
   我是拉法葉，一名具有一年半資歷的前端工程師，參與客戶數據平台與設計公司的開發專案。
