@@ -11,7 +11,13 @@
 @plugin "daisyui" {
     themes: all;
 }
+
 @layer {
+
+    body, html {
+        height: auto !important;
+        min-height: 100vh;
+      }
     pre.shiki {
         @apply bg-accent text-gray-200 p-4 rounded-lg overflow-x-auto;
     }

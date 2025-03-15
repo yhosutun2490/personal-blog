@@ -1,13 +1,14 @@
-import { onMounted, onUnmounted } from 'vue';
+import { onMounted, onUnmounted, nextTick } from 'vue';
 import LocomotiveScroll from 'locomotive-scroll';
 
 export function useLocoScroll() {
   const containerRef = ref(null);
-  let locoScroll = null;
+  const locoScroll = ref(null);
 
-  onMounted(() => {
+  onMounted(async () => {
+    await nextTick(); // 確保 DOM 更新完成
     if (import.meta.client && containerRef.value) {
-      locoScroll = new LocomotiveScroll({
+      locoScroll.value = new LocomotiveScroll({
         el: containerRef.value,
         smooth: true,
       });
@@ -15,9 +16,9 @@ export function useLocoScroll() {
   });
 
   onUnmounted(() => {
-    if (locoScroll) {
-      locoScroll.destroy();
-      locoScroll = null;
+    if (locoScroll.value) {
+      locoScroll.value.destroy();
+      locoScroll.value = null;
     }
   });
 
