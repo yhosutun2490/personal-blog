@@ -1,5 +1,7 @@
 <template>
-  <div class="card bg-base-100 shadow-lg flex flex-col">
+  <div 
+    class="card bg-base-100 shadow-lg"
+  >
     <figure class="w-full aspect-[16/9]">
       <ImageSkeleton 
         class="object-cover w-full h-full"
@@ -52,10 +54,6 @@ const props = defineProps({
     type: Object,
     default: () => {},
   },
-  side: {
-    type: Boolean,
-    default: false
-  }
 });
 
 const truncatedDescription = computed(() => {

@@ -5,7 +5,7 @@
         所有文章列表
         <main class="text-2xl">
           這裡主要是匯集所有文章。
-          利用主題關鍵字或文章大綱描述，讓您輕鬆篩選出您感興趣的文章。
+          利用主題關鍵字、文章大綱描述或標籤名稱，讓您更快速篩選出您感興趣的文章。
         </main>
       </div>
       <NuxtImg
@@ -30,13 +30,48 @@
           <path d="m21 21-4.3-4.3" />
         </g>
       </svg>
-      <input type="search" class="h-[50px]" placeholder="搜尋關鍵字或選擇標籤" />
+      <input
+        v-model.lazy="searchWords"
+        type="search"
+        class="h-[50px]"
+        placeholder="搜尋關鍵字或標籤"
+      >
     </label>
+    <ul class="search-lists list mt-[2rem]">
+      <li
+        v-for="card in filterArticles"
+        :key="card.title"
+        class="cursor-pointer relative hover:top-[-10px] mb-[1rem]"
+        @click="handleClickCard(card.alt)"
+      >
+        <ArticleCard
+          :data="card"
+          class="lg:card-side lg:grid lg:grid-cols-[250px_1fr]"
+        />
+      </li>
+    </ul>
   </div>
 </template>
 <script setup>
-const { data: page, error } = await useAsyncData(`all-blogs-data`, () => {
-  return queryCollection("blogs").all();
+import { ref, watch } from "vue";
+const searchWords = ref("");
+const { data: articleCardData, error } = await useAsyncData(
+  `all-blogs-data`,
+  () => {
+    return queryCollection("blogs").all();
+  }
+);
+
+const filterArticles = computed(() => {
+  const word = searchWords.value.trim().toLowerCase();
+  if (word) {
+    return articleCardData.value?.filter((item) =>
+      (item.title || "").toLowerCase().includes(word) ||
+      (item.description || "").toLowerCase().includes(word) ||
+      (item.tags || []).some(tag => tag.toLowerCase().includes(word)) // 避免 tags 為 null
+    );
+  } else {
+    return articleCardData.value;
+  }
 });
-console.log("pages", page.value);
 </script>

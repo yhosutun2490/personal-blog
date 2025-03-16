@@ -12,7 +12,7 @@
         @prev="handlePaginatorPrevNext('prev')"
         @next="handlePaginatorPrevNext('next')"
       />
-      <p class="total-page text-xl text-gray-500 ml-[0.5rem]"> 共 {{ totalPages }} 頁</p>
+      <p class="total-page text-xl text-gray-500 ml-[0.5rem]"> 共 {{ totalPages }} 頁，總計 {{ lists.length }} 篇</p>
     </section>
     <ul
       class="search-lists list
