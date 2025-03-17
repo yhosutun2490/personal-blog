@@ -13,7 +13,10 @@
       <NuxtImg src="keroro.jpg" class="w-[250px] h-[250px] rounded-xl" />
     </div>
     <div class="recent-post-blogs flex flex-col gap-5 mt-[1.5rem]">
-      <p class="title text-3xl font-bold">近期發布</p>
+      <p class="title text-3xl font-bold flex item-center gap-3">
+        <Icon name="mingcute:airplane-line" size="36" />
+        近期發布
+      </p>
       <ul
         class="search-lists list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
       >
@@ -33,7 +36,7 @@
 const { data: recentData, error } = await useAsyncData(
   `recent-post-blog`,
   () => {
-    return queryCollection("blogs").order('date', 'DESC').limit(3).all();
+    return queryCollection("blogs").order("date", "DESC").limit(3).all();
   }
 );
 console.log("pages", recentData.value);
