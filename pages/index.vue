@@ -5,7 +5,7 @@
         歡迎來到我的部落格
         <main class="text-2xl">
           這裡是我的技術筆記與學習歷程的紀錄地，主要分享
-          JavaScript、Vue.js、React以及相關開發經驗。<br />
+          JavaScript、Vue.js、React.js以及相關開發經驗。<br />
           你可以透過部落格、文章分類頁面，快速找到你感興趣的內容。希望能幫助你少走彎路！<br />
           👉 開始探索，一起互相精進技術吧！ 🚀
         </main>

@@ -8,48 +8,103 @@
           利用主題關鍵字、文章大綱描述或標籤名稱，讓您更快速篩選出您感興趣的文章。
         </main>
       </div>
-      <NuxtImg src="all-blogs-logo.webp" class="w-[250px] h-[250px] rounded-xl" />
+      <NuxtImg
+        src="all-blogs-logo.webp"
+        class="w-[250px] h-[250px] rounded-xl"
+      />
     </div>
     <label class="input w-[100%] mt-[1.5rem]">
-      <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
+      <svg
+        class="h-[1em] opacity-50"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+      >
+        <g
+          stroke-linejoin="round"
+          stroke-linecap="round"
+          stroke-width="2.5"
+          fill="none"
+          stroke="currentColor"
+        >
           <circle cx="11" cy="11" r="8" />
           <path d="m21 21-4.3-4.3" />
         </g>
       </svg>
-      <input v-model.lazy="searchWords" type="search" class="h-[50px]" placeholder="搜尋關鍵字或標籤">
+      <input
+        v-model.lazy="searchWords"
+        type="search"
+        class="h-[50px]"
+        placeholder="搜尋關鍵字或標籤"
+      />
     </label>
-    <TransitionGroup class="search-lists list min-h-[500px] mt-[2rem]" name="list" tag="ul">
-      <li v-for="card in filterArticles" :key="card.title" class="cursor-pointer relative hover:top-[-10px] mb-[1rem]"
-        @click="handleClickCard(card.alt)">
-        <ArticleCard :data="card" class="lg:card-side lg:grid lg:grid-cols-[250px_1fr]" />
+    <section class="pagination flex items-center mt-[1rem]">
+      <Pagination
+        :data-per-row="dataPerPage"
+        :total-data-length="filterArticles?.length"
+        :active-page="currentPage"
+        @update-page="(val) => (currentPage = val)"
+        @prev="handlePaginatorPrevNext('prev')"
+        @next="handlePaginatorPrevNext('next')"
+      />
+      <p class="total-page text-xl text-gray-500 ml-[0.5rem]">
+        共 {{ totalPages }} 頁，總計 {{ filterArticles.length }} 篇
+      </p>
+    </section>
+    <TransitionGroup
+      class="search-lists list min-h-[500px] mt-[2rem]"
+      name="list"
+      tag="ul"
+    >
+      <li
+        v-for="card in articlePagedata"
+        :key="card.title"
+        class="cursor-pointer relative hover:top-[-10px] mb-[1rem]"
+        @click="handleClickCard(card.alt)"
+      >
+        <ArticleCard
+          :data="card"
+          class="lg:card-side lg:grid lg:grid-cols-[250px_1fr]"
+        />
       </li>
     </TransitionGroup>
-
   </div>
 </template>
 <script setup>
-import { ref, watch } from "vue";
+import { ref } from "vue";
 const searchWords = ref("");
-const { data: articleCardData, error } = await useAsyncData(
-  `all-blogs-data`,
-  () => {
+const { data: articleCardData } = await useAsyncData(`all-blogs-data`, () => {
+  try {
     return queryCollection("blogs").all();
+  } catch (err) {
+    console.warn("query all-blogs-data failed", err.message);
+    return [];
   }
-);
+});
+
+const currentPage = ref(1)
+const dataPerPage = ref(3)
 
 const filterArticles = computed(() => {
   const word = searchWords.value.trim().toLowerCase();
   if (word) {
-    return articleCardData.value?.filter((item) =>
-      (item.title || "").toLowerCase().includes(word) ||
-      (item.description || "").toLowerCase().includes(word) ||
-      (item.tags || []).some(tag => tag.toLowerCase().includes(word)) // 避免 tags 為 null
+    return articleCardData.value?.filter(
+      (item) =>
+        (item.title || "").toLowerCase().includes(word) ||
+        (item.description || "").toLowerCase().includes(word) ||
+        (item.tags || []).some((tag) => tag.toLowerCase().includes(word)) // 避免 tags 為 null
     );
   } else {
     return articleCardData.value;
   }
 });
+
+const totalPages = computed(()=>Math.ceil(filterArticles?.value?.length / dataPerPage.value))
+
+const articlePagedata = computed(()=>{
+  const start = (currentPage.value - 1) * dataPerPage.value; // 計算起始索引
+  const end = start + dataPerPage.value; // 計算結束索引
+  return filterArticles.value?.slice(start,end)
+})
 </script>
 
 <style scoped>
