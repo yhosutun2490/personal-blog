@@ -49,8 +49,8 @@
         <ImageSkeleton 
           :src="'personal.jpg'"
           class="max-w-sm rounded-2xl shadow-2xl 
-          w-[200px] h-[200px]
-          lg:w-[300px] lg:h-[300px]"
+          w-[200px] h-[200px] mb-auto
+          lg:w-[250px] lg:h-[250px]"
         />
       </div>
     </div>

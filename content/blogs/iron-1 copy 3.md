@@ -1,6 +1,6 @@
 ---
 title: Vue Create App and Mount
-date: 2024-09-14
+date: 2024-09-15
 description: 介紹Vue的起手式和Create App是什麼，Vue的編譯和執行核心初步介紹。
 image: /iron/iron-1-1.jpg
 alt: Vue-Create-App-and-Mount
