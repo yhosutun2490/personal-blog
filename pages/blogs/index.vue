@@ -31,7 +31,7 @@
         </g>
       </svg>
       <input
-        v-model.lazy="searchWords"
+        v-model.lazy="searchQuery"
         type="search"
         class="h-[50px]"
         placeholder="搜尋關鍵字或標籤"
@@ -39,15 +39,15 @@
     </label>
     <section class="pagination flex items-center mt-[1rem]">
       <Pagination
-        :data-per-row="dataPerPage"
-        :total-data-length="filterArticles?.length"
-        :active-page="currentPage"
-        @update-page="(val) => (currentPage = val)"
+        :data-per-row="perPage"
+        :total-data-length="blogsCounts"
+        :active-page="page"
+        @update-page="(val) => (page = val)"
         @prev="handlePaginatorPrevNext('prev')"
         @next="handlePaginatorPrevNext('next')"
       />
       <p class="total-page text-xl text-gray-500 ml-[0.5rem]">
-        共 {{ totalPages }} 頁，總計 {{ filterArticles.length }} 篇
+        共 {{ totalPages }} 頁，總計 {{ blogsCounts }} 篇
       </p>
     </section>
     <TransitionGroup
@@ -56,7 +56,7 @@
       tag="ul"
     >
       <li
-        v-for="card in articlePagedata"
+        v-for="card in blogsData"
         :key="card.title"
         class="cursor-pointer relative hover:top-[-10px] mb-[1rem]"
         @click="handleClickCard(card.alt)"
@@ -70,41 +70,80 @@
   </div>
 </template>
 <script setup>
-import { ref } from "vue";
-const searchWords = ref("");
-const { data: articleCardData } = await useAsyncData(`all-blogs-data`, () => {
-  try {
-    return queryCollection("blogs").all();
-  } catch (err) {
-    console.warn("query all-blogs-data failed", err.message);
-    return [];
-  }
-});
+import { ref, watch } from "vue";
+const searchQuery = ref(""); // 儲存搜尋關鍵字
+const page = ref(1); // 當前分頁索引
+const perPage = 3; // 每頁顯示3篇文章
 
-const currentPage = ref(1)
-const dataPerPage = ref(3)
+// 查詢文章總數
+const { data: blogsCounts } = await useAsyncData(
+  "blogs-counts",
+  async () => {
+    try {
+      if (searchQuery.value) {
+        // 若有搜尋關鍵字，查詢符合條件的文章數
+        return await queryCollection("blogs")
+          .where("title", "LIKE", searchQuery.value)
+          .count();
+      } else {
+        return await queryCollection("blogs").count();
+      }
+    } catch (err) {
+      console.warn("查詢文章總數失敗", err.message);
+      return 0;
+    }
+  },
+  { watch: [searchQuery] } // 監聽關鍵字變化，重新計算總數
+);
 
-const filterArticles = computed(() => {
-  const word = searchWords.value.trim().toLowerCase();
-  if (word) {
-    return articleCardData.value?.filter(
-      (item) =>
-        (item.title || "").toLowerCase().includes(word) ||
-        (item.description || "").toLowerCase().includes(word) ||
-        (item.tags || []).some((tag) => tag.toLowerCase().includes(word)) // 避免 tags 為 null
-    );
+// 查詢當前分頁的文章
+const { data: blogsData } = await useAsyncData(
+  "blogs-data",
+  async () => {
+    try {
+      console.log("skip", (page.value - 1) * perPage);
+      let query = queryCollection("blogs").order("date", "DESC"); // all datas
+
+      if (searchQuery.value) {
+        query = query
+          .where("title", "LIKE", `${searchQuery.value}`)
+          .orWhere((query) => {
+            query.where("tags", "LIKE", `${searchQuery.value}`)
+            .where("descriptions", "LIKE", `${searchQuery.value}`);
+          })
+      }
+      return await query
+        .skip((page.value - 1) * perPage)
+        .limit(perPage)
+        .all();
+    } catch (err) {
+      console.warn("查詢文章資料失敗", err.message);
+      return [];
+    }
+  },
+  { watch: [searchQuery, page] } // 監聽關鍵字與分頁變化，重新查詢
+);
+
+// 計算總頁數
+const totalPages = computed(() =>
+  blogsCounts.value ? Math.ceil(blogsCounts.value / perPage) : 1
+);
+
+function handlePaginatorPrevNext(step) {
+  if (step === "next") {
+    if (page.value < totalPages.value) {
+      page.value++;
+    }
   } else {
-    return articleCardData.value;
+    if (page.value > 0) {
+      page.value--;
+    }
   }
+}
+
+watch(blogsData, (val) => {
+  console.log("當前分頁資料", val);
 });
-
-const totalPages = computed(()=>Math.ceil(filterArticles?.value?.length / dataPerPage.value))
-
-const articlePagedata = computed(()=>{
-  const start = (currentPage.value - 1) * dataPerPage.value; // 計算起始索引
-  const end = start + dataPerPage.value; // 計算結束索引
-  return filterArticles.value?.slice(start,end)
-})
 </script>
 
 <style scoped>
