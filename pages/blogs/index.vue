@@ -70,7 +70,7 @@
   </div>
 </template>
 <script setup>
-import { ref, watch } from "vue";
+import { ref } from "vue";
 const searchQuery = ref(""); // 儲存搜尋關鍵字
 const page = ref(1); // 當前分頁索引
 const perPage = 3; // 每頁顯示3篇文章
@@ -83,7 +83,7 @@ const { data: blogsCounts } = await useAsyncData(
       if (searchQuery.value) {
         // 若有搜尋關鍵字，查詢符合條件的文章數
         return await queryCollection("blogs")
-          .where("title", "LIKE", searchQuery.value)
+          .where("title", "LIKE", `%${searchQuery.value}%`)
           .count();
       } else {
         return await queryCollection("blogs").count();
@@ -101,16 +101,15 @@ const { data: blogsData } = await useAsyncData(
   "blogs-data",
   async () => {
     try {
-      console.log("skip", (page.value - 1) * perPage);
       let query = queryCollection("blogs").order("date", "DESC"); // all datas
 
       if (searchQuery.value) {
         query = query
-          .where("title", "LIKE", `${searchQuery.value}`)
-          .orWhere((query) => {
-            query.where("tags", "LIKE", `${searchQuery.value}`)
-            .where("descriptions", "LIKE", `${searchQuery.value}`);
-          })
+          .where("title", "LIKE", `%${searchQuery.value}%`)
+          .orWhere((query) => 
+            query.where("tags", "LIKE", `%${searchQuery.value}%`)
+            .where("description", "LIKE", `%${searchQuery.value}%`)
+          )
       }
       return await query
         .skip((page.value - 1) * perPage)
@@ -141,9 +140,6 @@ function handlePaginatorPrevNext(step) {
   }
 }
 
-watch(blogsData, (val) => {
-  console.log("當前分頁資料", val);
-});
 </script>
 
 <style scoped>
