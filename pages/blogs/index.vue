@@ -84,6 +84,10 @@ const { data: blogsCounts } = await useAsyncData(
         // 若有搜尋關鍵字，查詢符合條件的文章數
         return await queryCollection("blogs")
           .where("title", "LIKE", `%${searchQuery.value}%`)
+          .orWhere((query) => 
+            query.where("tags", "LIKE", `%${searchQuery.value}%`)
+            .where("description", "LIKE", `%${searchQuery.value}%`)
+          )
           .count();
       } else {
         return await queryCollection("blogs").count();
