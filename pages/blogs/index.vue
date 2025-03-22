@@ -71,6 +71,7 @@
 </template>
 <script setup>
 import { ref } from "vue";
+const router = useRouter()
 const searchQuery = ref(""); // 儲存搜尋關鍵字
 const page = ref(1); // 當前分頁索引
 const perPage = 3; // 每頁顯示3篇文章
@@ -143,7 +144,9 @@ function handlePaginatorPrevNext(step) {
     }
   }
 }
-
+function handleClickCard(blogAlt) {
+  router.push({ name: 'blogs-name', params: { name:blogAlt } });
+}
 </script>
 
 <style scoped>
