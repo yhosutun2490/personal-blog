@@ -21,11 +21,12 @@
      <li 
         v-for="card in articleCardData"
         :key="card.title"
-        class="cursor-pointer relative hover:top-[-10px]"
+        class="cursor-pointer relative"
         @click="handleClickCard(card.alt)"
       >
        <ArticleCard 
         :data="card"
+        class="group"
        />
      </li>
     </ul>

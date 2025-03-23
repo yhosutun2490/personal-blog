@@ -10,7 +10,7 @@ published: true
 ---
 # JavaScript事件循環、宏任務和微任務 
 
-# 今日學習重點:
+## 今日學習重點:
 
 1. JavaScript單線程(Single Thread)和瀏覽器提供的非同步環境
 2. 理解事件循環(Event Loop)核心觀念

@@ -58,12 +58,12 @@
       <li
         v-for="card in blogsData"
         :key="card.title"
-        class="cursor-pointer relative hover:top-[-10px] mb-[1rem]"
+        class="cursor-pointer relative mb-[1rem]"
         @click="handleClickCard(card.alt)"
       >
         <ArticleCard
           :data="card"
-          class="lg:card-side lg:grid lg:grid-cols-[250px_1fr]"
+          class="lg:card-side lg:grid lg:grid-cols-[250px_1fr] group"
         />
       </li>
     </TransitionGroup>

@@ -1,8 +1,8 @@
 <template>
   <div 
-    class="card bg-base-100 shadow-lg"
+    class="card bg-base-100 shadow-lg overflow-hidden"
   >
-    <figure class="w-full aspect-[16/9]">
+    <figure class="w-full aspect-[16/9] group-hover:scale-[1.05] group-hover:border-shadow transition-all duration-500">
       <ImageSkeleton 
         class="object-cover w-full h-full"
         :src="data?.image"
@@ -41,6 +41,10 @@
       <p class="card-description text-base w-full line-clamp-3">
         {{ truncatedDescription }}
       </p>
+      <div class="read-more flex items-center w-[120px]">
+        <p class="group-hover:text-blue-600 group-hover:underline">Read More</p>
+        <Icon name="meteor-icons:book-open" size="24" class="group-hover:translate-x-2 duration-500"/>
+      </div>
     </div>
   </div>
 </template>
