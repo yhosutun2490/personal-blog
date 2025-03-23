@@ -13,7 +13,7 @@
         class="w-[250px] h-[250px] rounded-xl"
       />
     </div>
-    <label class="input w-[100%] mt-[1.5rem]">
+    <label class="input md:w-[100%] lg:w-[70%] mt-[1.5rem]">
       <svg
         class="h-[1em] opacity-50"
         xmlns="http://www.w3.org/2000/svg"
@@ -70,68 +70,68 @@
   </div>
 </template>
 <script setup>
-import { ref } from "vue";
-const router = useRouter()
+import { ref, watch } from "vue";
+const router = useRouter();
 const searchQuery = ref(""); // 儲存搜尋關鍵字
-const page = ref(1); // 當前分頁索引
-const perPage = 3; // 每頁顯示3篇文章
+const page = ref(1);         // 當前分頁索引
+const perPage = 3;           // 每頁顯示3篇文章
 
-// 查詢文章總數
-const { data: blogsCounts } = await useAsyncData(
-  "blogs-counts",
-  async () => {
-    try {
-      if (searchQuery.value) {
-        // 若有搜尋關鍵字，查詢符合條件的文章數
-        return await queryCollection("blogs")
-          .where("title", "LIKE", `%${searchQuery.value}%`)
-          .orWhere((query) => 
-            query.where("tags", "LIKE", `%${searchQuery.value}%`)
-            .where("description", "LIKE", `%${searchQuery.value}%`)
-          )
-          .count();
-      } else {
-        return await queryCollection("blogs").count();
-      }
-    } catch (err) {
-      console.warn("查詢文章總數失敗", err.message);
-      return 0;
-    }
-  },
-  { watch: [searchQuery] } // 監聽關鍵字變化，重新計算總數
+// 撈出所有文章（只撈一次）
+const { data: allBlogs } = await useAsyncData("blogs-all", () =>
+  queryCollection("blogs").order('date', 'DESC').all()
 );
 
-// 查詢當前分頁的文章
-const { data: blogsData } = await useAsyncData(
-  "blogs-data",
-  async () => {
-    try {
-      let query = queryCollection("blogs").order("date", "DESC"); // all datas
+// 計算搜尋後的文章總數
+const blogsCounts = computed(() => {
+  if (!allBlogs.value) return 0;
 
-      if (searchQuery.value) {
-        query = query
-          .where("title", "LIKE", `%${searchQuery.value}%`)
-          .orWhere((query) => 
-            query.where("tags", "LIKE", `%${searchQuery.value}%`)
-            .where("description", "LIKE", `%${searchQuery.value}%`)
-          )
-      }
-      return await query
-        .skip((page.value - 1) * perPage)
-        .limit(perPage)
-        .all();
-    } catch (err) {
-      console.warn("查詢文章資料失敗", err.message);
-      return [];
-    }
-  },
-  { watch: [searchQuery, page] } // 監聽關鍵字與分頁變化，重新查詢
-);
+  if (!searchQuery.value) return allBlogs.value.length;
+
+  const keyword = searchQuery.value.toLowerCase();
+
+  return allBlogs.value.filter((blog) => {
+    const titleMatch = blog.title?.toLowerCase().includes(keyword);
+    const descMatch = blog.description?.toLowerCase().includes(keyword);
+    const tagsMatch = Array.isArray(blog.tags)
+      ? blog.tags.some((tag) => tag.toLowerCase().includes(keyword))
+      : false;
+
+    return titleMatch || descMatch || tagsMatch;
+  }).length;
+});
+
+// 取得目前分頁的文章
+const blogsData = computed(() => {
+  if (!allBlogs.value) return [];
+
+  const keyword = searchQuery.value.toLowerCase();
+
+  // 篩選符合關鍵字的文章
+  const filtered = searchQuery.value
+    ? allBlogs.value.filter((blog) => {
+        const titleMatch = blog.title?.toLowerCase().includes(keyword);
+        const descMatch = blog.description?.toLowerCase().includes(keyword);
+        const tagsMatch = Array.isArray(blog.tags)
+          ? blog.tags.some((tag) => tag.toLowerCase().includes(keyword))
+          : false;
+        return titleMatch || descMatch || tagsMatch;
+      })
+    : allBlogs.value;
+
+  // 計算分頁資料
+  const start = (page.value - 1) * perPage;
+  return filtered.slice(start, start + perPage);
+});
 
 // 計算總頁數
 const totalPages = computed(() =>
   blogsCounts.value ? Math.ceil(blogsCounts.value / perPage) : 1
 );
+
+// 搜尋時自動跳回第 1 頁
+watch(searchQuery, () => {
+  page.value = 1;
+});
 
 function handlePaginatorPrevNext(step) {
   if (step === "next") {
@@ -145,7 +145,7 @@ function handlePaginatorPrevNext(step) {
   }
 }
 function handleClickCard(blogAlt) {
-  router.push({ name: 'blogs-name', params: { name:blogAlt } });
+  router.push({ name: "blogs-name", params: { name: blogAlt } });
 }
 </script>
 
