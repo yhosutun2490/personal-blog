@@ -33,11 +33,14 @@
   </div>
 </template>
 <script setup>
+const router = useRouter()
 const { data: recentData, error } = await useAsyncData(
   `recent-post-blog`,
   () => {
     return queryCollection("blogs").order("date", "DESC").limit(3).all();
   }
 );
-console.log("pages", recentData.value);
+function handleClickCard(blogAlt) {
+  router.push({ name: "blogs-name", params: { name: blogAlt } });
+}
 </script>
