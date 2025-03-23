@@ -1,5 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import tailwindcss from "@tailwindcss/vite";
+import removeConsole from 'vite-plugin-remove-console';
+
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
@@ -24,7 +26,12 @@ export default defineNuxtConfig({
     storageKey: "nuxt-color-mode", // 儲存顏色模式的 key 值，影響 `localStorage`、`sessionStorage` 或 `cookie` 的 key
   },
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+      // 只在 production 移除 console
+      process.env.NODE_ENV === 'production' && removeConsole()
+    ],
+  
   },
   css: ["~/assets/app.css"],
   content: {
