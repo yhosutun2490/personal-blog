@@ -3,6 +3,7 @@
     class="navbar flex justify-between items-center px-[5%] py-5 border-b dark:border-gray-800 light:border-gray-200 sepia: border-amber-100 font-semibold"
     :data-theme="$colorMode.preference"
   >
+    <NuxtImg src="blog-favion.webp" class="rounded-full W-[40px] h-[40px] mr-[1rem]" />
     <NuxtLink to="/" active-class="text-primary font-bold" class="text-2xl">
       Rafael's Blog
     </NuxtLink>
